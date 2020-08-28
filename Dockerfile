@@ -11,12 +11,15 @@ ARG BUILD_PACKAGES='\
 RUN apt-get update -qq && \
     DEBIAN_FRONTEND=noninteractive apt-get install -y --no-install-recommends $BUILD_PACKAGES
 
+COPY docker docker
+
 COPY ./Dockerfile ./Dockerfile
 COPY ./Makefile ./Makefile
 COPY ./Jenkinsfile ./Jenkinsfile
 COPY ./README.md ./README.md
 COPY ./repeat_check.cpp ./repeat_check.cpp
 COPY ./repeat_check.h ./repeat_check.h
+COPY ./build.sh ./build.sh
 #COPY ./docker-entrypoint.sh ./docker-entrypoint.sh
 
 RUN make
