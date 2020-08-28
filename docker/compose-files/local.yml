@@ -1,0 +1,20 @@
+# Development environment using Docker.
+---
+version: '3'
+
+services:
+  auth-service:
+    image: repeat/check:latest
+    container_name: repeat_check
+    volumes:
+      - data-dev:/dir1/data
+    env_file:
+      - ../../.env.dev
+    ports:
+      - '4009:4009'
+    cap_add:
+      - SYS_PTRACE
+
+volumes:
+  db-data-dev: {}
+  data-dev: {}

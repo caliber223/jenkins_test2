@@ -1,5 +1,5 @@
 #!groovy
-// Build bt
+// Build repeat_check
 properties([disableConcurrentBuilds()])
 
 pipeline {
@@ -11,9 +11,9 @@ pipeline {
         timestamps()
     }
     stages {
-        stage("Build bittest") {
+        stage("Build Docker image") {
             steps {
-                sh 'make'
+                sh './build.sh'
             }
         }
     }
