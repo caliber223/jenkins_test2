@@ -26,5 +26,7 @@ RUN make
 
 EXPOSE 4009
 
+
 #ENTRYPOINT ["/docker-entrypoint.sh"]
 CMD ["./repeat_check"]
+
