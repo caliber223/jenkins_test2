@@ -9,7 +9,7 @@ build_final_image() {
   local file="Dockerfile"
   local msg="\n===> [STAGE 1] Auth service image: Building."
   echo -e "${msg}"
-  docker build --tag=repeat/check:latest --file=${file} .
+  docker build --tag=caliber223/vz/auth:latest --file=${file} .
 }
 
 main() {
