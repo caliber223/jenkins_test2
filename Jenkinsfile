@@ -16,7 +16,6 @@ try {
         stage('Checkout') {
             sh "echo '-------------------------- step 4 -----------------------------'"
             checkout([
-                sh "echo '-------------------------- step 5 -----------------------------'"
                 $class: 'GitSCM',
                 branches: scm.branches,
                 extensions: scm.extensions + [
