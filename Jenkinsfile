@@ -8,15 +8,15 @@ def imageName
 properties([
     disableConcurrentBuilds()
 ])
-echo '-------------------------- step 1 -----------------------------'
+sh "echo '-------------------------- step 1 -----------------------------'"
 try {
-    echo '-------------------------- step 2 -----------------------------'
+    sh "echo '-------------------------- step 2 -----------------------------'"
     node('docker') {
-        echo '-------------------------- step 3 -----------------------------'
+        sh "echo '-------------------------- step 3 -----------------------------'"
         stage('Checkout') {
-            echo '-------------------------- step 4 -----------------------------'
+            sh "echo '-------------------------- step 4 -----------------------------'"
             checkout([
-                echo '-------------------------- step 5 -----------------------------'
+                sh "echo '-------------------------- step 5 -----------------------------'"
                 $class: 'GitSCM',
                 branches: scm.branches,
                 extensions: scm.extensions + [
@@ -32,18 +32,18 @@ try {
                 ]
             ])
         }
-        echo '-------------------------- step 6 -----------------------------'
+        sh "echo '-------------------------- step 6 -----------------------------'"
         imageName = "${dockerRegistry}/vz/auth"
 
         //docker.withRegistry("https://${dockerRegistry}/", 'docker-registry') {
         docker.withRegistry("${dockerRegistry}/", 'docker-registry') {
-            echo '-------------------------- step 7 -----------------------------'
+            sh "echo '-------------------------- step 7 -----------------------------'"
             stage('Build') {
                 ansiColor('xterm') {
                     sh "./build.sh"
                 }
             }
-            echo '-------------------------- step 8 -----------------------------'
+            sh "echo '-------------------------- step 8 -----------------------------'"
             stage('Push') {
                 docker.image(imageName).push()
                 docker.image(imageName).push('latest')
