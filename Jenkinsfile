@@ -8,13 +8,12 @@ def imageName
 properties([
     disableConcurrentBuilds()
 ])
-sh "echo '-------------------------- step 1 -----------------------------'"
+
 try {
-    sh "echo '-------------------------- step 2 -----------------------------'"
     node('docker') {
-        sh "echo '-------------------------- step 3 -----------------------------'"
+        sh "echo '-------------------------- step 1 -----------------------------'"
         stage('Checkout') {
-            sh "echo '-------------------------- step 4 -----------------------------'"
+            sh "echo '-------------------------- step 2 -----------------------------'"
             checkout([
                 $class: 'GitSCM',
                 branches: scm.branches,
@@ -31,18 +30,18 @@ try {
                 ]
             ])
         }
-        sh "echo '-------------------------- step 6 -----------------------------'"
+        sh "echo '-------------------------- step 3 -----------------------------'"
         imageName = "${dockerRegistry}/vz/auth"
 
         //docker.withRegistry("https://${dockerRegistry}/", 'docker-registry') {
         docker.withRegistry("${dockerRegistry}/", 'docker-registry') {
-            sh "echo '-------------------------- step 7 -----------------------------'"
+            sh "echo '-------------------------- step 4 -----------------------------'"
             stage('Build') {
                 ansiColor('xterm') {
                     sh "./build.sh"
                 }
             }
-            sh "echo '-------------------------- step 8 -----------------------------'"
+            sh "echo '-------------------------- step 5 -----------------------------'"
             stage('Push') {
                 docker.image(imageName).push()
                 docker.image(imageName).push('latest')
