@@ -25,7 +25,7 @@ try {
                 userRemoteConfigs: [
                     //[credentialsId: 'jenkins-open-sys-with-key', url: 'git@github.com:VirtualInstruments/atr-backend.git']
                     //[credentialsId: 'dockerhub-az223', url: 'git@github.com:caliber223/jenkins_test2.git']
-                    [credentialsId: 'dockerhub-az223', url: 'git@github.com:caliber223/jenkins_test2.git']
+                    [credentialsId: 'jenkins-azot-with-key', url: 'git@github.com:caliber223/jenkins_test2.git']
                 ]
             ])
         }
