@@ -4,6 +4,8 @@ boolean success = true
 def dockerRegistry = "registry.open-sys.org"
 def baseImageName
 def imageName
+baseImageName = "${dockerRegistry}/test/auth"
+imageName = "${baseImageName}"
 echo "------------------------ step 1 -----------------------"
 properties([
     disableConcurrentBuilds()
@@ -26,19 +28,7 @@ properties([
             }
         }
 
-        stage ('Image name') {
-            steps {
-                step ('baseImageName') {
-                    baseImageName = "${dockerRegistry}/test/auth"
-                }
-                step ('imageName') {
-                    imageName = "${baseImageName}"
-                }
-                step ('echo') {
-                    echo "------------------------ step 2 -----------------------"
-                }
-            }
-        }
+
         /*docker.withRegistry("https://${dockerRegistry}/", 'docker-registry') {
 
             stage('Build') {
@@ -56,3 +46,5 @@ properties([
     } // end stages
 
 }
+
+echo "------------------------ step end -----------------------"
