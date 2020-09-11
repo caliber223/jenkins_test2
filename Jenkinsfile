@@ -3,6 +3,7 @@
 boolean success = true
 def dockerRegistry = "registry.open-sys.org"
 //def dockerRegistry = "caliber223"
+def baseImageName
 def imageName
 
 properties([
@@ -32,7 +33,7 @@ try {
 
         baseImageName = "${dockerRegistry}/test/auth"
         imageName = "${baseImageName}"
-
+/*
         docker.withRegistry("https://${dockerRegistry}/", 'docker-registry') {
         //docker.withRegistry("${dockerRegistry}/", 'docker-registry') {
 
@@ -47,7 +48,7 @@ try {
                 docker.image(imageName).push('latest')
             }
 
-        } // end 'withRegistry'
+        } // end 'withRegistry'*/
     } // end 'node'
 } catch (e) {
     echo e.toString()
