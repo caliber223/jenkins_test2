@@ -12,16 +12,16 @@ properties([
 
 try {
     node('docker') {
-        stage('Checkout') {
+        /*stage('Checkout') {
             checkout([
                 $class: 'GitSCM',
                 branches: scm.branches,
-                /*extensions: scm.extensions + [
+                extensions: scm.extensions + [
                     //[$class: 'CleanBeforeCheckout'],
                     //[$class: 'PathRestriction', includedRegions: ''],
                     //[$class: 'PathRestriction', includedRegions: '^services/.*$'],
                     [$class: 'SubmoduleOption', recursiveSubmodules: true, parentCredentials: true]
-                ],*/
+                ],
                 submoduleCfg: [],
                 userRemoteConfigs: [
                     //[credentialsId: 'jenkins-open-sys-with-key', url: 'git@github.com:VirtualInstruments/atr-backend.git']
@@ -29,11 +29,20 @@ try {
                     [credentialsId: 'jenkins-azot3-with-key', url: 'git@github.com:caliber223/jenkins_test2.git']
                 ]
             ])
+        }*/
+
+        stage('login') {
+            steps {
+                echo "====================     docker login     ======================="
+                withCredentials([usernamePassword(credentialsId: 'jenkins-azot3-with-key', usernameVariable: 'USERNAME', passwordVariable: 'PASSWORD')]) {
+                    sh "docker login -u $USERNAME -p $PASSWORD"
+                }
+            }
         }
 
         baseImageName = "${dockerRegistry}/test/auth"
         imageName = "${baseImageName}"
-/*
+
         docker.withRegistry("https://${dockerRegistry}/", 'docker-registry') {
         //docker.withRegistry("${dockerRegistry}/", 'docker-registry') {
 
@@ -48,7 +57,7 @@ try {
                 docker.image(imageName).push('latest')
             }
 
-        } // end 'withRegistry'*/
+        } // end 'withRegistry'
     } // end 'node'
 } catch (e) {
     echo e.toString()
