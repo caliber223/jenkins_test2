@@ -17,7 +17,7 @@ try {
                 branches: scm.branches,
                 extensions: scm.extensions + [
                     [$class: 'CleanBeforeCheckout'],
-                    [$class: 'PathRestriction', includedRegions: ''],
+                    //[$class: 'PathRestriction', includedRegions: ''],
                     //[$class: 'PathRestriction', includedRegions: '^services/.*$'],
                     [$class: 'SubmoduleOption', recursiveSubmodules: true, parentCredentials: true]
                 ],
