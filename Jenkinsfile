@@ -26,9 +26,13 @@ properties([
             }
         }
 
-        baseImageName = "${dockerRegistry}/test/auth"
-        imageName = "${baseImageName}"
-        echo "------------------------ step 2 -----------------------"
+        stage ('Image name') {
+            steps {
+                baseImageName = "${dockerRegistry}/test/auth"
+                imageName = "${baseImageName}"
+                echo "------------------------ step 2 -----------------------"
+            }
+        }
         /*docker.withRegistry("https://${dockerRegistry}/", 'docker-registry') {
 
             stage('Build') {
